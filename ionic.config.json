@@ -1,0 +1,7 @@
+{
+  "name": "nutri-diet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
