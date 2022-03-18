@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nutri-diet": {
+      "hosting": {
+        "app": [
+          "nutri-diet"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nutri-diet"
+  }
+}
