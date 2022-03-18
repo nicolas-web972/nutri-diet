@@ -1,0 +1,71 @@
+<!-- Page de connection -->
+<ion-content>
+  <ion-card class="ion-no-margin">
+    <ion-img src="assets/images/header1.png"></ion-img>
+
+    <ion-card-content>
+      <form [formGroup]="credentials" (ngSubmit)="login()">
+        <div class="wrapform">
+          <ion-item>
+            <ion-input
+              type="text"
+              name="email"
+              class="form-control"
+              formControlName="email"
+              placeholder="E-mail">
+              <ion-icon name="mail-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <div>
+            <ng-container>
+              <div
+                class="error_message"
+                *ngIf="(email.dirty || email.touched) && email.errors">
+                E-mail invalide
+              </div>
+            </ng-container>
+          </div>
+          <ion-item>
+            <ion-input
+              type="password"
+              name="password"
+              class="form-control"
+              formControlName="password"
+              placeholder="**************">
+              <ion-icon name="lock-closed"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <div>
+            <ng-container>
+              <div
+                class="error_message"
+                *ngIf="(password.dirty || password.touched) && password.errors">
+                Le mot de passe doit avoir au moins 5 caractères
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="password_forgot">
+          <ion-button fill="clear" class="ion-no-padding" [routerLink]="['/reset']">
+            Mot de passe oublié ?
+          </ion-button>
+        </div>
+        <div class="sign-btn-wrap">
+          <ion-button
+            shape="round"
+            type="submit"
+            fill="solid"
+            class="sign-btn"
+            [disabled]="!credentials.valid">
+            Se connecter
+          </ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="ion-card-footer">
+    <span>Je n'ai pas de compte ?</span>
+    <button class="ion-no-padding" [routerLink]="['/signup']">Je m'inscris</button>
+  </div>
+</ion-content>
