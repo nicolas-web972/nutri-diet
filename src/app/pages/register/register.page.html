@@ -1,0 +1,64 @@
+<!-- Page d'inscription-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="loginscreen" text="">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-color">
+  <ion-card class="ion-no-margin">
+    <ion-card-header>
+      <ion-card-title>
+        S'inscrire
+      </ion-card-title>
+      <ion-card-subtitle>
+        Créer un compte en remplissant se formulaire.
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <form (ngSubmit)="register()" [formGroup]="credentials">
+      <ion-card-content>
+        <ion-item>
+          <ion-input name="email" type="text" placeholder="E-mail" formControlName="email">
+            <ion-icon name="mail-outline"></ion-icon>
+          </ion-input>
+          <div>
+            <ng-container>
+              <div
+                class="error_message"
+                *ngIf="(email.dirty || email.touched) && email.errors">
+                E-mail invalide
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-input name="password" type="password" placeholder="************" formControlName="password">
+            <ion-icon name="lock-closed"></ion-icon>
+          </ion-input>
+          <div>
+            <ng-container>
+              <div
+                class="error_message"
+                *ngIf="(password.dirty || password.touched) && password.errors">
+                Le mot de passe doit avoir au moins 5 caractères
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+        <div class="sign-btn-wrap">
+          <ion-button shape="round" type="submit" fill="solid" class="sign-btn" (click)="register()">
+            S'inscrire
+          </ion-button>
+        </div>
+        <div class="ion-card-footer">
+          <span>J'ai déja un compte.</span><button class="ion-no-padding" [routerLink]="['/']">Je me connecte</button>
+        </div>
+      </ion-card-content>
+    </form>
+  </ion-card>
+</ion-content>
