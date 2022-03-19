@@ -1,18 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Nutridiet
-    </ion-title>
+    <ion-title>test</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="container">
-    <div class="card-left">
-      <img src="https://via.placeholder.com/250x170" alt="Avatar">
-    </div>
-    <div class="card-left">
-      <img src="https://via.placeholder.com/250x170" alt="Avatar">
+    <div class="card" *ngFor="let name of categoriesName">
+      <h4>{{name | titlecase}}</h4>
+      <img src="https://img.freepik.com/photos-gratuite/steak-boeuf-grille-aux-legumes-grill_126277-15.jpg?w=1800" alt="Avatar">
     </div>
   </div>
 </ion-content>
