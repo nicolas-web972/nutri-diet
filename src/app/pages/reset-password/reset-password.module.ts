@@ -13,8 +13,8 @@ import { ResetPasswordPage } from './reset-password.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ResetPasswordPageRoutingModule
+    ResetPasswordPageRoutingModule,
   ],
-  declarations: [ResetPasswordPage]
+  declarations: [ResetPasswordPage],
 })
 export class ResetPasswordPageModule {}
