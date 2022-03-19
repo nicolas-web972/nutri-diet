@@ -11,15 +11,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./test.page.scss'],
 })
 export class TestPage implements OnInit {
-  public toto: any;
-  public infos;
+  public list: any;
+  public categoriesName;
   constructor(private readonly afDatabase: AngularFireDatabase) {}
 
   ngOnInit() {
-    this.toto = this.afDatabase.list('/categories');
-    this.toto.valueChanges().subscribe((p: any) => {
-      this.infos = p;
-      console.log(this.infos);
+    this.list = this.afDatabase.list('/');
+    this.list.valueChanges().subscribe((response: any) => {
+      this.categoriesName = Object.keys(response[0]);
+      console.log('BDD', response[0].meat);
     });
   }
 }
