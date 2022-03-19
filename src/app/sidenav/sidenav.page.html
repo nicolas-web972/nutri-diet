@@ -8,13 +8,20 @@
 
     <ion-content>
       <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let nav of NAV">
-          <ion-item
+        <ion-menu-toggle auto-hide="false" >
+          <ion-item *ngFor="let nav of navs"
             routerDirection="root"
              [routerLink]="nav.link"
              [class.active-menu]="active === nav.link">
               {{nav.name}}
               <ion-icon slot="start" [ios]="nav.icon + '-outline'" [md]="nav.icon + '-sharp'"></ion-icon>
+          </ion-item>
+          <ion-item
+          (click)="logout()"
+            routerDirection="root"
+             [class.active-menu]="active === '/'">
+              Se déconnecter
+              <ion-icon slot="start" [ios]="'log-out' + '-outline'" [md]="'log-out' + '-sharp'"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>

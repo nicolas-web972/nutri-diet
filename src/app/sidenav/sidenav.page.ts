@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router, RouterEvent } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -12,7 +13,7 @@ export class SidenavPage implements OnInit {
 
   active = '';
 
-  NAV = [
+  navs = [
     {
       name: 'Catégories',
       link: '/nav/home',
@@ -23,19 +24,18 @@ export class SidenavPage implements OnInit {
       link: '/nav/profile',
       icon: 'person-circle'
     },
-    {
-      name: 'Se déconnecter',
-      link: '/nav/profile',
-      icon: 'log-out'
-    }
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService,) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url;
     });
   }
 
   ngOnInit() { }
+  async logout() {
+    await this.authService.logout();
+    this.router.navigateByUrl('/', { replaceUrl: true });
+  }
 
 }
