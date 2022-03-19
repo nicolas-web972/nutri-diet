@@ -1,26 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>test</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>test</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
-  <pre>
-    {{item | json}}
-  </pre>
-  <ion-item *ngFor="let name of categoriesName">
-    <ion-card>
-      <ion-card-header>
-        <ion-img [src]="picture"></ion-img>
-        <ion-card-subtitle></ion-card-subtitle>
-        <ion-card-title>{{name}}</ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit
-        clean.
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
-</ion-content>
+  <ion-content>
+    <div id="container">
+      <div class="card" *ngFor="let name of categoriesName">
+        <img src="https://via.placeholder.com/300x170" alt="Avatar">
+        <h4>{{name}}</h4>
+      </div>
+    </div>
+  </ion-content>
