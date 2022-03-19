@@ -14,7 +14,12 @@ import { DataService } from '../services/data.service';
 })
 export class TestPage implements OnInit {
   public categoriesName;
-
+  public criteres = {
+    glucides: -1,
+    lipides: -1,
+    proteines: -1,
+    sodium: -1,
+  };
   constructor(
     private readonly afDatabase: AngularFireDatabase,
     private firestore: AngularFirestore,
@@ -24,7 +29,7 @@ export class TestPage implements OnInit {
   ngOnInit() {
     this.dataService.getCategories().subscribe((response: any) => {
       this.categoriesName = Object.keys(response[0]);
-      console.log('BDD', Object.keys(response[0].laitages));
+      console.log('BDD', response[0]);
     });
 
     // permet d'avoir la liste des laitages
@@ -49,9 +54,10 @@ export class TestPage implements OnInit {
 
     // permet d'avoir les caracteristiques des légumes racine
     this.dataService.getCategories().subscribe((response: any) => {
+      this.criteres = response[0].féculents.céréales;
       console.log(
-        'Caracteristiques des légumes racine',
-        response[0].féculents['légumes racine']
+        'Caracteristiques céréales -------------------->',
+        this.criteres
       );
     });
   }
