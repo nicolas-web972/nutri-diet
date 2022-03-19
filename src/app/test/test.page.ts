@@ -16,7 +16,10 @@ export class TestPage implements OnInit {
   constructor(private readonly afDatabase: AngularFireDatabase) {}
 
   ngOnInit() {
-    this.toto = this.afDatabase.object('/categories/meat/beef');
-    this.toto.valueChanges().subscribe((p: any) => (this.infos = p));
+    this.toto = this.afDatabase.list('/categories');
+    this.toto.valueChanges().subscribe((p: any) => {
+      this.infos = p;
+      console.log(this.infos);
+    });
   }
 }
