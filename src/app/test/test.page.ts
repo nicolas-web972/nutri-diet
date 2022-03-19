@@ -19,7 +19,7 @@ export class TestPage implements OnInit {
     this.list = this.afDatabase.list('/');
     this.list.valueChanges().subscribe((response: any) => {
       this.categoriesName = Object.keys(response[0]);
-      console.log('BDD', response[0].meat);
+      console.log('BDD', response[0]);
     });
   }
 }
