@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/nav/home', { replaceUrl: true });
     } else {
       this.showAlert('Erreur de connexion', 'essayez de nouveau!');
     }
