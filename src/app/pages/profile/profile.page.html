@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mon profil</ion-title>
+
+    <!-- Hamburger -->
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="/assets/images/profile-pic.png" />
+    <ion-card-content>
+      <ion-card-title> Prénom Nom </ion-card-title>
+      <form (ngSubmit)="editForm()">
+        <ion-item>
+          <ion-label>Poids</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="infos.weight"
+            name="weight"
+          ></ion-input>kg
+        </ion-item>
+        <ion-item>
+          <ion-label>Taille</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="infos.height"
+            name="height"
+          ></ion-input>cm
+        </ion-item>
+        <ion-item>
+          <ion-label>Maladies</ion-label>
+          <ion-select>
+            <ion-select-option value="cholesterol">Cholestérol</ion-select-option>
+            <ion-select-option value="diabete">Diabète</ion-select-option>
+            <ion-select-option value="hypertension">Hypertension</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Mot de passe</ion-label>
+          <ion-input
+            type="password"
+            [(ngModel)]="infos.password"
+            name="password"
+          ></ion-input>
+        </ion-item>
+        <button ion-button type="submit" block>Modifier</button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
