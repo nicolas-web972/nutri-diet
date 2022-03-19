@@ -40,14 +40,14 @@ pathMatch: 'full'
   },
     {
       path: '',
-      redirectTo: 'nav/home',
+      redirectTo: 'nav/login',
       pathMatch: 'full'
     }
   ]
 },
 {
   path: '',
-  redirectTo: 'nav/home',
+  redirectTo: 'nav/login',
   pathMatch: 'full'
 }
 ];
