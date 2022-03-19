@@ -9,12 +9,7 @@ import { SidenavPageRoutingModule } from './sidenav-routing.module';
 import { SidenavPage } from './sidenav.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SidenavPageRoutingModule
-  ],
-  declarations: [SidenavPage]
+  imports: [CommonModule, FormsModule, IonicModule, SidenavPageRoutingModule],
+  declarations: [SidenavPage],
 })
 export class SidenavPageModule {}
