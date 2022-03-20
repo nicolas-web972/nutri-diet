@@ -14,6 +14,8 @@ import { DataService } from '../services/data.service';
 })
 export class HomePage implements OnInit {
   public categoriesName;
+  numbers = ['1','2','3','4'];
+
   constructor(
     private readonly afDatabase: AngularFireDatabase,
     private firestore: AngularFirestore,
