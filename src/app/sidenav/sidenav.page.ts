@@ -8,34 +8,38 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './sidenav.page.html',
   styleUrls: ['./sidenav.page.scss'],
 })
-
 export class SidenavPage implements OnInit {
-
   active = '';
 
   navs = [
     {
       name: 'Catégories',
       link: '/nav/home',
-      icon: 'albums'
+      icon: 'albums',
     },
+    [
+      {
+        name: 'feculent',
+        link: '/nav/home/feculent',
+        icon: 'albums',
+      },
+    ],
     {
       name: 'Profil',
       link: '/nav/profile',
-      icon: 'person-circle'
+      icon: 'person-circle',
     },
   ];
 
-  constructor(private router: Router, private authService: AuthService,) {
+  constructor(private router: Router, private authService: AuthService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url;
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
   async logout() {
     await this.authService.logout();
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
-
 }

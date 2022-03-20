@@ -12,7 +12,7 @@ export class DataService {
   ) {}
 
   getCategories() {
-    return this.afDatabase.list('/').valueChanges();
+    return this.afDatabase.object('/categories').valueChanges();
   }
 
   getCharacteristics(product) {

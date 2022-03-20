@@ -6,6 +6,14 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./sidenav/sidenav.module').then( m => m.SidenavPageModule)
   },
+  {
+    path: 'feculent',
+    loadChildren: () => import('./feculent/feculent.module').then( m => m.FeculentPageModule)
+  },
+  {
+    path: 'laitages',
+    loadChildren: () => import('./laitages/laitages.module').then( m => m.LaitagesPageModule)
+  },
 ];
 
 @NgModule({

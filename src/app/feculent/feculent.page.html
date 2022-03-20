@@ -1,0 +1,19 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-title> Féculents </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <div id="container">
+    <div class="card" *ngFor="let name of feculentCategoriesName">
+      <h4>{{name}}</h4>
+      <img
+        src="https://img.freepik.com/photos-gratuite/steak-boeuf-grille-aux-legumes-grill_126277-15.jpg?w=1800"
+        alt="Avatar"
+      />
+    </div>
+  </div>
+</ion-content>
