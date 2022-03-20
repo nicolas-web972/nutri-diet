@@ -33,12 +33,14 @@
         </ion-item>
         <ion-item>
           <ion-label>Maladies</ion-label>
-          <ion-select>
-            <ion-select-option value="cholesterol">Cholestérol</ion-select-option>
-            <ion-select-option value="diabete">Diabète</ion-select-option>
-            <ion-select-option value="hypertension">Hypertension</ion-select-option>
-          </ion-select>
-        </ion-item>
+          <ion-list>
+            <ion-item *ngFor="let disease of diseases">
+              <ion-label>{{disease.value}}</ion-label>
+              <ion-checkbox slot="start" [(ngModel)]="disease.selected" (ionChange)="onChange()" [ngModelOptions]="{standalone: true}">
+              </ion-checkbox>
+            </ion-item>
+          </ion-list>
+      </ion-item>
         <ion-item>
           <ion-label>Mot de passe</ion-label>
           <ion-input
