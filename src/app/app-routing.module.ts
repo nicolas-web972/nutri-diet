@@ -14,6 +14,14 @@ const routes: Routes = [
     path: 'laitages',
     loadChildren: () => import('./laitages/laitages.module').then( m => m.LaitagesPageModule)
   },
+  {
+    path: 'legumes',
+    loadChildren: () => import('./legumes/legumes.module').then( m => m.LegumesPageModule)
+  },
+  {
+    path: 'viandes',
+    loadChildren: () => import('./viandes/viandes.module').then( m => m.ViandesPageModule)
+  },
 ];
 
 @NgModule({

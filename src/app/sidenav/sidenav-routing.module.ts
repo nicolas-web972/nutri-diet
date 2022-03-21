@@ -33,6 +33,16 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'home/viandes',
+        loadChildren: () =>
+          import('../viandes/viandes.module').then((m) => m.ViandesPageModule),
+      },
+      {
+        path: 'home/legumes',
+        loadChildren: () =>
+          import('../legumes/legumes.module').then((m) => m.LegumesPageModule),
+      },
+      {
         path: 'login',
         loadChildren: () =>
           import('../pages/login/login.module').then((m) => m.LoginPageModule),

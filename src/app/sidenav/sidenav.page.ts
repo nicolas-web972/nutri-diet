@@ -17,13 +17,6 @@ export class SidenavPage implements OnInit {
       link: '/nav/home',
       icon: 'albums',
     },
-    [
-      {
-        name: 'feculent',
-        link: '/nav/home/feculent',
-        icon: 'albums',
-      },
-    ],
     {
       name: 'Profil',
       link: '/nav/profile',

@@ -8,13 +8,12 @@ import { Observable } from 'rxjs';
 import { DataService } from '../services/data.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-viandes',
+  templateUrl: './viandes.page.html',
+  styleUrls: ['./viandes.page.scss'],
 })
-export class HomePage implements OnInit {
-  public categoriesName;
-
+export class ViandesPage implements OnInit {
+  public viandeCategoriesName;
   constructor(
     private readonly afDatabase: AngularFireDatabase,
     private firestore: AngularFirestore,
@@ -22,8 +21,8 @@ export class HomePage implements OnInit {
   ) {}
   ngOnInit() {
     this.dataService.getCategories().subscribe((response: any) => {
-      this.categoriesName = Object.keys(response);
-      console.log('BDD', Object.keys(response));
+      this.viandeCategoriesName = Object.keys(response.viandes);
+      console.log('Liste des laitage', Object.keys(response.viandes));
     });
   }
 }

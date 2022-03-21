@@ -8,13 +8,12 @@ import { Observable } from 'rxjs';
 import { DataService } from '../services/data.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-legumes',
+  templateUrl: './legumes.page.html',
+  styleUrls: ['./legumes.page.scss'],
 })
-export class HomePage implements OnInit {
-  public categoriesName;
-
+export class LegumesPage implements OnInit {
+  public legumeCategoriesName;
   constructor(
     private readonly afDatabase: AngularFireDatabase,
     private firestore: AngularFirestore,
@@ -22,8 +21,8 @@ export class HomePage implements OnInit {
   ) {}
   ngOnInit() {
     this.dataService.getCategories().subscribe((response: any) => {
-      this.categoriesName = Object.keys(response);
-      console.log('BDD', Object.keys(response));
+      this.legumeCategoriesName = Object.keys(response.legumes);
+      console.log('Liste des legume', Object.keys(response.legumes));
     });
   }
 }
