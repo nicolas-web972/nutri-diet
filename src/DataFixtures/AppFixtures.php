@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
     {
 
         
-        for ($i=0; $i < 50 ; $i++) {
+        for ($i=1; $i <= 50 ; $i++) {
 
             $ingredient = new Ingredient();
             $ingredient -> setName($this -> faker -> word())
