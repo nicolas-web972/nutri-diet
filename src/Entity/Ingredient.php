@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * les date de mise a jour utilisent return $this->UpDatedAt = new \DateTimeImmutable(); directement dans la fonction getUpDatedAt
+ */
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
