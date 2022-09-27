@@ -31,6 +31,11 @@ class Ingredient
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
 
+    
+    #[ORM\Column]
+    #[Assert\NotNull()]
+    private ?\DateTimeImmutable $UpDatedAt = null;
+
     /**
      * Constructor de la date de création
      */
@@ -76,6 +81,18 @@ class Ingredient
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpDatedAt()
+    {
+        return $this->UpDatedAt = new \DateTimeImmutable();
+    }
+
+    public function setUpDatedAt(?\DateTimeInterface $UpDatedAt): self
+    {
+        $this->UpDatedAt = $UpDatedAt;
 
         return $this;
     }

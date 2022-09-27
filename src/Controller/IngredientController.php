@@ -87,7 +87,7 @@ class IngredientController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $ingredient = $form->getData();
-
+            $ingredient->getUpDatedAt();
             $manager->persist($ingredient);
             $manager->flush();
 
@@ -104,7 +104,7 @@ class IngredientController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * controller pour supprimer un produit
      *
      * @param Ingredient $ingredient
