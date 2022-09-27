@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Ingredient;
 use App\Form\IngredientType;
+use App\Form\ModifyIngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -15,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class IngredientController extends AbstractController
 {
     /**
-     * fonction pour afficher tout les produits
+     * controller pour afficher tout les produits
      *
      * @param IngredientRepository $repository
      * @param PaginatorInterface $paginator
@@ -37,7 +39,7 @@ class IngredientController extends AbstractController
         ]);
     }
     /**
-     * fonction pour créer un produit
+     * controller pour créer un produit
      *
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -68,5 +70,37 @@ class IngredientController extends AbstractController
             'pages/ingredient/new.html.twig',
             ['form' => $form->createView()]
         );
+    }
+
+    /**
+     * controller pour modifier un produit
+     *
+     * @param Ingredient $ingredient
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[route('/ingredient/edition/{id}', name: 'ingredient.edit', methods: ['get', 'POST'])]
+    public function edit(Ingredient $ingredient, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(ModifyIngredientType::class, $ingredient);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $ingredient = $form->getData();
+
+            $manager->persist($ingredient);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre ingrédient a été modifié avec succès !'
+            );
+
+            return $this->redirectToRoute('ingredient.index');
+        }
+
+        return $this->render('pages/ingredient/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
