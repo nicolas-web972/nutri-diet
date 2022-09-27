@@ -1,10 +1,8 @@
 <?php
 
-/**
- * les date de mise a jour utilisent return $this->UpDatedAt = new \DateTimeImmutable(); directement dans la fonction getUpDatedAt
- */
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\IngredientRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -34,10 +32,8 @@ class Ingredient
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
 
-    
-    #[ORM\Column]
-    #[Assert\NotNull()]
-    private ?\DateTimeImmutable $UpDatedAt = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $UpDatedAt = null;
 
     /**
      * Constructor de la date de création
@@ -90,12 +86,12 @@ class Ingredient
 
     public function getUpDatedAt()
     {
-        return $this->UpDatedAt = new \DateTimeImmutable();
+        return $this->UpDatedAt;
     }
 
-    public function setUpDatedAt(?\DateTimeInterface $UpDatedAt): self
+    public function setUpDatedAt()
     {
-        $this->UpDatedAt = $UpDatedAt;
+        $this->UpDatedAt = new \DateTimeImmutable();
 
         return $this;
     }

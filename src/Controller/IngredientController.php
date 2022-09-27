@@ -87,7 +87,7 @@ class IngredientController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $ingredient = $form->getData();
-            $ingredient->getUpDatedAt();
+            $ingredient->setUpDatedAt();
             $manager->persist($ingredient);
             $manager->flush();
 
