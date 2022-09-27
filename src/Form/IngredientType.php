@@ -15,6 +15,16 @@ class IngredientType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $labelSubmit = "";
+        switch ($options['route']) {
+            case 'ingredient.new':
+                $labelSubmit = "Ajouter l'ingrédient";
+                break;
+            case 'ingredient.edit':
+                $labelSubmit = "Modifier l'ingredient";
+                break;
+        }
+
         $builder
             ->add('name', TextType::class, [
                 'attr' => [
@@ -48,13 +58,14 @@ class IngredientType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Ajouter l\'ingrédient'
+                'label' => $labelSubmit
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'route' => null,
             'data_class' => Ingredient::class,
         ]);
     }

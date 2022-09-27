@@ -24,6 +24,8 @@
 							<th scope="col">Nom</th>
 							<th scope="col">Prix</th>
 							<th scope="col">Date de création</th>
+							<th scope="col">Edition</th>
+							<th scope="col">Suppression</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -33,7 +35,8 @@
 								<td>{{ ingredient.name }}</td>
 								<td>{{ ingredient.price }}</td>
 								<td>{{ ingredient.createdAt|date('d/m/Y') }}</td>
-								<td><a href="https://127.0.0.1:8000/ingredient/edition/{{ ingredient.id }}" class="btn btn-primary btn-sm">Modifier l'ingrédient</a></td>
+								<td><a href="{{ path('ingredient.edit', { id: ingredient.id} ) }}" class="btn btn-info btn-sm">Modifier</a></td>
+								<td><a href="{{ path('ingredient.delete', { id: ingredient.id} ) }}" onclick="return confirm('Voulez-vous vraiment supprimer cet ingrédient ?')" class="btn btn-danger btn-sm">SUPPRIMER</a></td>
 							</tr>
 						{% endfor %}
 					</tbody>
