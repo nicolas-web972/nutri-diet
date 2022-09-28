@@ -71,6 +71,15 @@ class RecipeController extends AbstractController
         ]);
     }
 
+
+    /**
+     * controller pour modifier une recette
+     *
+     * @param Recipe $recipe
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[route('/recette/edition/{id}', name: 'recipe.edit', methods: ['GET', 'POST',])]
     public function edit(Recipe $recipe, Request $request, EntityManagerInterface $manager): Response
     {
@@ -94,6 +103,13 @@ class RecipeController extends AbstractController
         ]);
     }
 
+        /**
+     * controller pour supprimer une recette
+     *
+     * @param Recipe $recipe
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/recette/suppression/{id}', name: 'recipe.delete', methods: ['GET', 'POST'])]
     public function delete(EntityManagerInterface $manager, Recipe $recipe): Response
     {
