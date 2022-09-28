@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Ingredient;
 use App\Form\IngredientType;
-use App\Form\ModifyIngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
