@@ -16,9 +16,14 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+            - "../src/DependencyInjection/"
+            - "../src/Entity/"
+            - "../src/Kernel.php"
+            - "../src/Tests/"
+
+    App\EntityListener\:
+        resource: "../src/EntityListener/"
+        tags: ["doctrine.orm.entity_listener"]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
