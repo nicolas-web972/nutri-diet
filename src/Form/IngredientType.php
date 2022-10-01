@@ -15,6 +15,7 @@ class IngredientType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        //création d'un switch pour changer le bouton submit du formulaire selon l'action voulue
         $labelSubmit = "";
         switch ($options['route']) {
             case 'ingredient.new':

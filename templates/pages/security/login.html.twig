@@ -1,27 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}NutriDiet - connexion{% endblock %}
+	{% block title %}NutriDiet - connexion
+	{% endblock %}
 
-{% block body %}
-<div class="container">
-<h1 class="mt-4">Formulaire de connexion</h1>
+	{% block body %}
+		<div class="container">
+			<h1 class="mt-4">Formulaire de connexion</h1>
 
-{% if error %}
-<div class="alert alert-danger mt-4">
-{{error.messageKey|trans(error.messageData, 'security') }}
-</div>
-{% endif %}
+			{% if error %}
+				<div class="alert alert-danger mt-4">
+					{{error.messageKey|trans(error.messageData, 'security') }}
+				</div>
+			{% endif %}
 
-<form action="{{ path('security.login') }}" method="post">
-<div class="form-group">
-      <label for="username" class="form-label mt-4">Addresse e-mail</label>
-      <input type="email" class="form-control" id="username" name="_username" placeholder="entrez votre e-mail" value="{{ last_username }}">
-    </div>
-    <div class="form-group">
-      <label for="password" class="form-label mt-4">Password</label>
-      <input type="password" class="form-control" id="password" name="_password" placeholder="Entrez votre mot de passe">
-    </div>
-    <button type="submit" class="btn btn-primary mt-4">Se connecter</button>
-</form>
-</div>
-{% endblock %}
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			<form action="{{ path('security.login') }}" method="post">
+				<div class="form-group">
+					<label for="username" class="form-label mt-4">Addresse e-mail</label>
+					<input type="email" class="form-control" id="username" name="_username" placeholder="entrez votre e-mail" value="{{ last_username }}">
+				</div>
+				<div class="form-group">
+					<label for="password" class="form-label mt-4">Password</label>
+					<input type="password" class="form-control" id="password" name="_password" placeholder="Entrez votre mot de passe">
+				</div>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				<button type="submit" class="btn btn-primary mt-4">Se connecter</button>
+			</form>
+		</div>
+	{% endblock %}
