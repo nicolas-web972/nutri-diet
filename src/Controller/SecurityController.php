@@ -14,7 +14,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SecurityController extends AbstractController
 {
-
+    /**
+     * fonction de login avec authentification automatique
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route('/connexion', name: 'security.login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -23,7 +28,11 @@ class SecurityController extends AbstractController
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
     }
-
+    /**
+     * route logout
+     *
+     * @return void
+     */
     #[Route('/deconnexion', name: 'security.logout')]
     public function logout()
     {
