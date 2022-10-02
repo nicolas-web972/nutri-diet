@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class UserController extends AbstractController
      * @param UserPasswordHasherInterface $hasher
      * @return Response
      */
-    #[Route('/utilisateur/edition/{id}', name: 'user.edit')]
+    #[Route('/utilisateur/edition/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
     public function edit(User  $user, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
         if (!$this->getUser()) {
@@ -61,4 +62,42 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-}
+
+    #[Route('/utilisateur/edition-mot-de-passe/{id}', name: 'user.edit.password', methods: ['GET', 'POST'])]
+    public function editPassword(User $user, Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(UserPasswordType::class);
+
+        $form-> handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) {
+                $user->setPassword(
+                    $hasher->hashPassword(
+                    $user,
+                    $form->getData()['newPassword']
+                )
+            );
+
+            $this->addFlash(
+                'success',
+                'votre mot de passe a été modifiées avec succès !',
+            );
+
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('recipe.index');
+        } else {
+            $this->addFlash(
+                'warning',
+                'Le mot de passe renseigné est incorrect !',
+            );
+        }
+        }
+
+        return $this->render('pages/user/edit-password.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+}   
