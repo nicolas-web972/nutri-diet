@@ -165,7 +165,7 @@ class RecipeType extends AbstractType
                     'class' => 'btn btn-primary mt-4'
                 ],
                 'label' => $labelSubmit
-            ]);;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
