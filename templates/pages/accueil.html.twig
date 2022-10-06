@@ -1,16 +1,33 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Nutridiet - Accueil{% endblock %}
+	{% block title %}Nutridiet - Accueil
+	{% endblock %}
 
 
-{% block body %}
-    <div class="container mt-4">
-        <div class="jumbotron">
-            <h1 class="display-4">Bienvenue sur nutridiet</h1>
-            <p class="lead">Nutridiet est une application qui va te permettre de créer des recettes à   base d'ingrédients que tu auras choisie. Tu pourras partager tes recettes ou bien les     gardées pour toi. Le principal est de te faire plaisir et de prendre soin de toi et de tes  proches.</p>
-            <hr class="my-4">
-            <p>Pour commencer, inscris toi sur le site grace au lien ci dessous.</p>
-            <a class="btn btn-primary btn-lg" href="{{ path("security.registration") }}" role="button">Inscription</a>
-        </div>
-    </div>
-{% endblock %}
+	{% block body %}
+		<div class="container mt-4">
+			<div class="jumbotron">
+				<h1 class="display-4">Bienvenue sur nutridiet</h1>
+				<p class="lead">Nutridiet est une application qui va te permettre de créer des recettes à   base d'ingrédients que tu auras choisie. Tu pourras partager tes recettes ou bien les     gardées pour toi. Le principal est de te faire plaisir et de prendre soin de toi et de tes  proches.</p>
+				<hr class="my-4">
+				<p>Pour commencer, inscris toi sur le site grace au lien ci dessous.</p>
+				<a class="btn btn-primary btn-lg" href="{{ path("security.registration") }}" role="button">Inscription</a>
+			</div>
+			<div class="recipes">
+				<h2 class="mt-4">Recettes de la communautés</h2>
+				<div class="d-flex justify-content-between">
+					{% for recipe in recipes %}
+						<div class="card border-primary mb-3" style="max-width:20rem;">
+							<a href="{{ path('recipe.show', { id: recipe.id} ) }}" style="cursor:pointer; color:black; text-decoration:none;">
+								<div class="card-header">Recette n°{{ recipe.id }}</div>
+								<div class="card-body">
+									<h4 class="card-title">{{ recipe.name }}</h4>
+									<p class="card-text">{{ recipe.description|slice(0, 100) ~ '...' }}</p>
+								</div>
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endblock %}
