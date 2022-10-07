@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use App\Entity\Mark;
 use App\Entity\User;
 use Faker\Generator;
 use App\Entity\Recipe;
@@ -35,7 +36,7 @@ class AppFixtures extends Fixture
                 ->setRoles(['ROLE_USER'])
                 ->setPlainPassword('password');
 
-            $users[]= $user;
+            $users[] = $user;
             $manager->persist($user);
         }
 
@@ -53,6 +54,7 @@ class AppFixtures extends Fixture
         }
 
         //Recipe
+        $recipes = [];
         for ($j = 1; $j <= 25; $j++) {
             $recipe = new Recipe();
             $recipe->setName($this->faker->word())
@@ -67,7 +69,20 @@ class AppFixtures extends Fixture
             for ($k = 0; $k < mt_rand(5, 15); $k++) {
                 $recipe->addIngredient($ingredients[mt_rand(0, count($ingredients) - 1)]);
             }
+            $recipes[] = $recipe;
             $manager->persist($recipe);
+        }
+
+        //marks
+        foreach ($recipes as $recipe) {
+            for ($i = 0; $i < mt_rand(0, 4); $i++) {
+                $mark = new Mark();
+                $mark->setMark(mt_rand(1, 5))
+                    ->setUser($users[mt_rand(0, count($users) - 1)])
+                    ->setRecipe($recipe);
+
+                $manager->persist($mark);
+            }
         }
 
 

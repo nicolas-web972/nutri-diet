@@ -23,7 +23,7 @@
 							<th scope="col">Numéro</th>
 							<th scope="col">Nom</th>
 							<th scope="col">Prix</th>
-                            <th scope="col">Difficulté</th>
+							<th scope="col">Difficulté</th>
 							<th scope="col">Date de création</th>
 							<th scope="col">Edition</th>
 							<th scope="col">Suppression</th>
@@ -37,8 +37,12 @@
 								<td>{{ recipe.price is same as(null) ? 'Non renseigné' : recipe.price }}</td>
 								<td>{{ recipe.difficulty is same as(null) ? 'Non renseigné' : recipe.difficulty }}</td>
 								<td>{{ recipe.createdAt|date('d/m/Y') }}</td>
-								<td><a href="{{ path('recipe.edit', { id: recipe.id} ) }}" class="btn btn-info btn-sm">Modifier</a></td>
-								<td><a href="{{ path('recipe.delete', { id: recipe.id} ) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger btn-sm">SUPPRIMER</a></td>
+								<td>
+									<a href="{{ path('recipe.edit', { id: recipe.id} ) }}" class="btn btn-info btn-sm">Modifier</a>
+								</td>
+								<td>
+									<a href="{{ path('recipe.delete', { id: recipe.id} ) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger btn-sm">SUPPRIMER</a>
+								</td>
 							</tr>
 						{% endfor %}
 					</tbody>

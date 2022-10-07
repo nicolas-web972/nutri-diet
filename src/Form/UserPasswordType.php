@@ -14,12 +14,12 @@ class UserPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('plainPassword', PasswordType::class, [
-            'attr' => ['class' => 'form-control'],
-            'label' => 'Entrez votre ancien mot de passe',
-            'label_attr' => ['class' => 'form-label mt-4'],
-            'constraints' => [new Assert\NotBlank()]
-        ])
+            ->add('plainPassword', PasswordType::class, [
+                'attr' => ['class' => 'form-control'],
+                'label' => 'Entrez votre ancien mot de passe',
+                'label_attr' => ['class' => 'form-label mt-4'],
+                'constraints' => [new Assert\NotBlank()]
+            ])
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [

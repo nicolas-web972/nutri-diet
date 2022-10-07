@@ -39,7 +39,7 @@ class RegistrationType extends AbstractType
                     'minlength' => '2',
                     'maxlength' => '50'
                 ],
-                'required' =>false,
+                'required' => false,
                 'label' => 'Pseudo (facultatif)',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -76,9 +76,9 @@ class RegistrationType extends AbstractType
                     ]
                 ],
                 'second_options' => [
-                        'attr' => [
-                            'class' => 'form-control'
-                        ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
                     'label' => 'Confirmation du mot de passe',
                     'label_attr' => [
                         'class' => 'form-label mt-4'

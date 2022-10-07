@@ -57,7 +57,7 @@ class UserController extends AbstractController
         ]);
     }
 
-   /**
+    /**
      * modification d'un user
      *
      * @param User $choosenUser
