@@ -31,7 +31,7 @@ class RecipeController extends AbstractController
     #[Route('/recette', name: 'recipe.index', methods: ['GET'])]
     public function index(RecipeRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-        $recipes = $paginator->paginate(
+        $recipes = $paginator ->paginate(
             $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1),
             10
@@ -39,67 +39,6 @@ class RecipeController extends AbstractController
 
         return $this->render('pages/recipe/liste.html.twig', [
             'recipes' => $recipes,
-        ]);
-    }
-
-    #[Route('/recette/communaute', name: "recipe.community", methods: ['GET'])]
-    public function indexPublic(RecipeRepository $repository, PaginatorInterface $paginator, Request $request): Response
-    {
-        $recipes = $paginator->paginate(
-            $repository->findPublicRecipe(null),
-            $request->query->getInt('page', 1),
-            9
-        );
-
-        return $this->render('pages/recipe/community.html.twig', [
-            'recipes' => $recipes,
-        ]);
-    }
-
-    /**
-     * controller de l'affichage unique des recettes publiques
-     *
-     * @param Recipe $recipe
-     * @return Response
-     */
-    #[Security("is_granted('ROLE_USER') and recipe.isIsPublic() === true")]
-    #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET', 'POST'])]
-    public function show(Recipe $recipe, Request $request, MarkRepository $markRepository, EntityManagerInterface $manager): Response
-    {
-        $mark = new Mark();
-        $form = $this->createForm(MarkType::class);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $mark->setUser($this->getUser())
-                ->setRecipe($recipe);
-
-            $existingMark = $markRepository->findOneBy([
-                'user' => $this->getUser(),
-                'recipe' => $recipe
-            ]);
-
-            if (!$existingMark) {
-                $manager->persist($mark);
-            } else {
-                $existingMark->setMark(
-                    $form->getData()->getMark()
-                );
-            }
-
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                'Votre note a bien été pris en compte.'
-            );
-            return $this->redirectToRoute('recipe.show', ['recipe' => $recipe->getId()]);
-        }
-
-        return $this->render('pages/recipe/show.html.twig', [
-            'recipe' => $recipe,
-            'form' => $form->createView()
         ]);
     }
 
@@ -111,8 +50,8 @@ class RecipeController extends AbstractController
      * @return Response
      */
     #[IsGranted('ROLE_USER')]
-    #[Route('/recette/creation', name: "recipe.new", methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    #[Route('/recette/creation', name:"recipe.new", methods:['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager):Response
     {
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe, ['route' => 'recipe.new']);
@@ -134,7 +73,7 @@ class RecipeController extends AbstractController
         }
 
         return $this->render('pages/recipe/ajout.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form -> createView(),
         ]);
     }
 
@@ -171,7 +110,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    /**
+        /**
      * controller pour supprimer une recette
      *
      * @param Recipe $recipe
