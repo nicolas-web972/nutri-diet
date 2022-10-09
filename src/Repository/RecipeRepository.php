@@ -30,6 +30,13 @@ class RecipeRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * fonction permettant de recuperer les recettes publiques,
+     *  avec un argument acceptant le zero pour traiter le nombre de recette a recuperer
+     *
+     * @param integer|null $nbRecipes
+     * @return array
+     */
     public function findPublicRecipe(?int $nbRecipes): array
     {
         sleep(3);

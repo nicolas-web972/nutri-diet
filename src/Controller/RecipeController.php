@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Mark;
 use App\Entity\Recipe;
-use App\Form\MarkType;
 use App\Form\RecipeType;
-use App\Repository\MarkRepository;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -31,16 +28,56 @@ class RecipeController extends AbstractController
     #[Route('/recette', name: 'recipe.index', methods: ['GET'])]
     public function index(RecipeRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-        $recipes = $paginator ->paginate(
+        $recipes = $paginator->paginate(
             $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1),
-            10
+            9
         );
 
         return $this->render('pages/recipe/liste.html.twig', [
             'recipes' => $recipes,
         ]);
     }
+
+    /**
+     * controller pour voir toute les recettes publiques
+     *
+     * @param RecipeRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return response
+     */
+    #[Route('/recette/publique', name: 'recipe.index.public', methods: ['GET'])]
+    public function indexPublic(RecipeRepository $repository, PaginatorInterface $paginator, Request $request): response
+    {
+        $recipes = $paginator->paginate(
+            $repository->findPublicRecipe(null),
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return $this->render('pages/recipe/index_public.html.twig', [
+            'recipes' => $recipes
+        ]);
+    }
+
+
+    /**
+     * controller qui permet de voir une recette publique
+     *
+     * @param Recipe $recipe
+     * @return Response
+     */
+    #[Security("is_granted('ROLE_USER') and recipe.getIsPublic() === true")]
+    #[Route("/recette/{id}", name: "recipe.show", methods: ["get"])]
+    public function Show(Recipe $recipe): Response
+    {
+        return $this->render('pages/recipe/show.html.twig', [
+            'recipe' => $recipe
+        ]);
+    }
+
+
 
     /**
      * controller pour creer une recette
@@ -50,8 +87,8 @@ class RecipeController extends AbstractController
      * @return Response
      */
     #[IsGranted('ROLE_USER')]
-    #[Route('/recette/creation', name:"recipe.new", methods:['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager):Response
+    #[Route('/recette/creation', name: "recipe.new", methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe, ['route' => 'recipe.new']);
@@ -73,7 +110,7 @@ class RecipeController extends AbstractController
         }
 
         return $this->render('pages/recipe/ajout.html.twig', [
-            'form' => $form -> createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -110,7 +147,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * controller pour supprimer une recette
      *
      * @param Recipe $recipe
