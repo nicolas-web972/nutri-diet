@@ -13,6 +13,9 @@
 				</div>
 			{% endfor %}
 			<h1 class="mt-4">{{ recipe.name }}</h1>
+			<p class="mt-4">La moyenne de cette recette est de
+				{{ recipe.average|number_format(2, '.', ',') }}
+				/ 5</p>
 			<span class="badge bg-primary">Créée le
 				{{ recipe.createdAt|date('d/m/Y') }}</span>
 			<div class="mt-4">
@@ -59,5 +62,8 @@
 						{{ ingredient.name }}</span>
 				{% endfor %}
 			</div>
-		</div>
-	{% endblock %}
+			<div class="mark mt-4">
+				{{ form(form)}}
+				</div>
+			</div>
+		{% endblock %}

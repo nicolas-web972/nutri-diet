@@ -74,16 +74,16 @@ class AppFixtures extends Fixture
         }
 
         //marks
-        // foreach ($recipes as $recipe) {
-        //     for ($i = 0; $i < mt_rand(0, 4); $i++) {
-        //         $mark = new Mark();
-        //         $mark->setMark(mt_rand(1, 5))
-        //             ->setUser($users[mt_rand(0, count($users) - 1)])
-        //             ->setRecipe($recipe);
+        foreach ($recipes as $recipe) {
+            for ($i = 0; $i < mt_rand(0, 4); $i++) {
+                $mark = new Mark();
+                $mark->setMark(mt_rand(1, 5))
+                    ->setUser($users[mt_rand(0, count($users) - 1)])
+                    ->setRecipe($recipe);
 
-        //         $manager->persist($mark);
-        //     }
-        // }
+                $manager->persist($mark);
+            }
+        }
 
 
         $manager->flush();
