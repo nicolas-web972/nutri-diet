@@ -65,6 +65,9 @@
 					{{ form_errors(form.isFavorite) }}
 				</div>
 			</div>
+
+			{{ form_row(form.imageFile) }}
+
 			{{ form_label(form.ingredients) }}
 			{{ form_widget(form.ingredients) }}
 			{{ form_end(form) }}

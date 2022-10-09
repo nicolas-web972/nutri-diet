@@ -16,16 +16,16 @@ class MarkType extends AbstractType
         $builder
             ->add('mark', ChoiceType::class, [
                 'choices' => [
-                    '1' => 1,
-                    '2' => 2,
-                    '3' => 3,
-                    '4' => 4,
-                    '5' => 5,
+                    '1 / 5' => 1,
+                    '2 / 5' => 2,
+                    '3 / 5' => 3,
+                    '4 / 5' => 4,
+                    '5 / 5' => 5,
                 ],
                 'attr' => [
                     'class' => 'form-select'
                 ],
-                'label' => 'Noter la recette',
+                'label' => 'Noter la recette de 1 à 5',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
