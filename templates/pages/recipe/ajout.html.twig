@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-	{% block title %}NutriDiet - Nouvelle recettes
+	{% block title %}NutriDiet - Création de recettes
 	{% endblock %}
 
 	{% block body %}
@@ -69,7 +69,16 @@
 			{{ form_row(form.imageFile) }}
 
 			{{ form_label(form.ingredients) }}
-			{{ form_widget(form.ingredients) }}
+			<br>
+			<div id="ingredients-wrapper" class="mt-4">
+				{% for field in form.ingredients %}
+					<div style="min-width: 10%;">
+						{{ form_widget(field) }}
+						{{ form_label(field) }}
+					</div>
+				{% endfor %}
+			</div>
+
 			{{ form_end(form) }}
 		</div>
 	{% endblock %}

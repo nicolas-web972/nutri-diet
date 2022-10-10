@@ -17,7 +17,7 @@
 				<img style="max-width: 500px;" src="{{ vich_uploader_asset(recipe, 'imageFile') }}">
 			</div>
 			{% if recipe.average > 0 %}
-				<p class="mt-4">La moyenne de cette recette est de
+				<p class="mt-4">La note moyenne de cette recette est de
 					{{ recipe.average|number_format(2, '.', ',') }}
 					/ 5</p>
 			{% else %}

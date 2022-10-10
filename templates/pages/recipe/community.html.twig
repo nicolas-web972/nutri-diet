@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-	{% block title %}NutriDiet - Recettes publiques
+	{% block title %}NutriDiet - Recettes de la communauté
 	{% endblock %}
 
 	{% block body %}
 		<div class="container mt-4">
 			{% if not recipes.items is same as([]) %}
-				<h1>Recettes de la communautés</h1>
+				<h1>Recettes de la communauté</h1>
 				<div class="d-flex justify-content-center flex-wrap">
 
 					{% for recipe in recipes %}
@@ -16,7 +16,7 @@
 								<div class="card-body">
 									<h4 class="card-title">{{ recipe.name }}</h4>
 									{% if recipe.average > 0 %}
-										<p class="card-text">La moyenne de cette recette est de
+										<p class="card-text">La note moyenne de cette recette est de
 											{{ recipe.average|number_format(2, '.', ',') }}
 											/ 5</p>
 									{% else %}

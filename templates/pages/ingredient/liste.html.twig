@@ -5,17 +5,17 @@
 
 	{% block body %}
 		<div class="container mt-4">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
 			{% if not ingredients.items is same as ([]) %}
 
 				<h1>Mes ingrédients</h1>
-				<a href="{{ path("ingredient.new") }}" class="btn btn-primary">Ajouter un ingrédient</a>
+				<a href="{{ path("ingredient.new") }}" class="btn btn-primary mt-4">Ajouter un ingrédient</a>
 				<div class="count">
-					{% for message in app.flashes('success') %}
-						<div class="alert alert-success mt-4">
-							{{ message }}
-						</div>
-					{% endfor %}
-					<p class="mt-4">Nombre total d'ingrédients :{{ ingredients.getTotalItemCount }}</p>
+					<p class="mt-4">Nombre total d'ingrédient(s) :{{ ingredients.getTotalItemCount }}</p>
 				</div>
 				<table class="table table-hover mt-4">
 					<thead>
@@ -33,7 +33,8 @@
 							<tr class="table-primary">
 								<th scope="row">{{ ingredient.id }}</th>
 								<td>{{ ingredient.name }}</td>
-								<td>{{ ingredient.price }}</td>
+								<td>{{ ingredient.price|number_format(2, '.', ',') }}
+									€</td>
 								<td>{{ ingredient.createdAt|date('d/m/Y') }}</td>
 								<td>
 									<a href="{{ path('ingredient.edit', { id: ingredient.id} ) }}" class="btn btn-info btn-sm">Modifier</a>
@@ -50,6 +51,7 @@
 				</div>
 			{% else %}
 				<h4>Il n'a pas d'ingrédients à afficher</h4>
+				<a href="{{ path("ingredient.new") }}" class="btn btn-primary mt-4">Ajouter un ingrédient</a>
 			{% endif %}
 		</div>
 	{% endblock %}

@@ -5,17 +5,17 @@
 
 	{% block body %}
 		<div class="container mt-4">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
 			{% if not recipes.items is same as ([]) %}
 
 				<h1>Mes recettes</h1>
-				<a href="{{ path("recipe.new") }}" class="btn btn-primary">Ajouter une recette</a>
+				<a href="{{ path("recipe.new") }}" class="btn btn-primary mt-4">Ajouter une recette</a>
 				<div class="count">
-					{% for message in app.flashes('success') %}
-						<div class="alert alert-success mt-4">
-							{{ message }}
-						</div>
-					{% endfor %}
-					<p class="mt-4">Nombre total de recettes :{{ recipes.getTotalItemCount }}</p>
+					<p class="mt-4">Nombre total de recette(s) :{{ recipes.getTotalItemCount }}</p>
 				</div>
 				<table class="table table-hover mt-4">
 					<thead>
@@ -35,7 +35,14 @@
 							<tr class="table-primary">
 								<th scope="row">{{ recipe.id }}</th>
 								<td>{{ recipe.name }}</td>
-								<td>{{ recipe.price is same as(null) ? 'Non renseigné' : recipe.price }}</td>
+								<td>
+									{% if recipe.price is null %}
+										Non renseigné
+									{% else %}
+										{{ recipe.price|number_format(2, '.', ',') }}
+										€
+									{% endif %}
+								</td>
 								<td>{{ recipe.difficulty is same as(null) ? 'Non renseigné' : recipe.difficulty }}</td>
 								<td>{{ recipe.createdAt|date('d/m/Y') }}</td>
 								<td>
@@ -56,6 +63,7 @@
 				</div>
 			{% else %}
 				<h4>Il n'a pas de recette à afficher</h4>
+				<a href="{{ path("recipe.new") }}" class="btn btn-primary mt-4">Ajouter une recette</a>
 			{% endif %}
 		</div>
 	{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-	{% block title %}NutriDiet - Modification recettes
+	{% block title %}NutriDiet - Modification d'une recette
 	{% endblock %}
 
 	{% block body %}
@@ -16,6 +16,10 @@
 				<div class="form-error">
 					{{ form_errors(form.name) }}
 				</div>
+			</div>
+
+			<div class="form-image mt-4">
+				{{ form_row(form.imageFile) }}
 			</div>
 
 			<div class="form-group">
@@ -66,7 +70,16 @@
 				</div>
 			</div>
 			{{ form_label(form.ingredients) }}
-			{{ form_widget(form.ingredients) }}
+			<br>
+			<div id="ingredients-wrapper" class="mt-4">
+				{% for field in form.ingredients %}
+					<div style="min-width: 10%;">
+						{{ form_widget(field) }}
+						{{ form_label(field) }}
+					</div>
+				{% endfor %}
+			</div>
+
 			{{ form_end(form) }}
 		</div>
 	{% endblock %}
