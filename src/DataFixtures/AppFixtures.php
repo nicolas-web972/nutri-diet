@@ -7,6 +7,7 @@ use App\Entity\Mark;
 use App\Entity\User;
 use Faker\Generator;
 use App\Entity\Recipe;
+use App\Entity\Contact;
 use App\Entity\Ingredient;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -14,6 +15,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * Pour les fixtures liées, on a plusieurs possibilité.
+     * - ici on utilise un fichier avec une création de tableau à chaque boucle pour pouvoir le réutiliser pour les liaisons
+     * - sinon pour les plus grand projets, on peut faire un fichier pour chaque entity et faire les liaisons avec les fonctions add et get reference et crée l'ordre d'insertion en base de donnée avec getDependencies
+     */
+
     /**
      * @var Generator
      */
@@ -28,7 +35,7 @@ class AppFixtures extends Fixture
     {
         //users
         $users = [];
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->setFullName($this->faker->name())
                 ->setPseudo(mt_rand(0, 1) === 1 ? $this->faker->firstName() : null)
@@ -42,7 +49,7 @@ class AppFixtures extends Fixture
 
         //Ingredients
         $ingredients = [];
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
 
             $ingredient = new Ingredient();
             $ingredient->setName($this->faker->word())
@@ -55,7 +62,7 @@ class AppFixtures extends Fixture
 
         //Recipe
         $recipes = [];
-        for ($j = 1; $j <= 25; $j++) {
+        for ($j = 0; $j < 25; $j++) {
             $recipe = new Recipe();
             $recipe->setName($this->faker->word())
                 ->setTime(mt_rand(0, 1) == 1 ? mt_rand(1, 1440) : null)
@@ -83,6 +90,17 @@ class AppFixtures extends Fixture
 
                 $manager->persist($mark);
             }
+        }
+
+        //contact 
+        for ($i = 0; $i < 5; $i++) {
+            $contact = new Contact();
+            $contact->setFullName($this->faker->name())
+                ->setEmail($this->faker->email())
+                ->setSubject('demande n°' . ($i + 1))
+                ->setMessage($this->faker->text());
+
+            $manager->persist($contact);
         }
 
 
