@@ -4,10 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +15,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
 
+    /**
+     * controller du formulaire de contact
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param MailerInterface $mailer
+     * @return Response
+     */
     #[Route('/contact', name: 'contact.new')]
-    public function index(Request $request, EntityManagerInterface $manager, MailerInterface $mailer): Response
+    public function index(Request $request, EntityManagerInterface $manager, MailService $mailService): Response
     {
         $contact = new Contact();
 
-        //appel de l'utilisateur connecté
+        //appel de l'utilisateur connecté pour remplir le formulaire automatiquement
+
         /**
          * @var UserEntity
          */
@@ -41,19 +49,13 @@ class ContactController extends AbstractController
             $manager->persist($contact);
             $manager->flush();
 
-            //Email vers administration
-            $email = (new TemplatedEmail())
-                ->from($contact->getEmail())
-                ->to('admin@nutridiet.com')
-                ->subject($contact->getSubject())
-                ->htmlTemplate('emails/mail.html.twig')
-                ->context([
-                    'contact' => $contact
-                ]);
-
-            $mailer->send($email);
-
-
+            //Email vers administration cree avec le MailService
+            $mailService -> sendEmail(
+                $contact->getEmail(),
+                $contact->getSubject(),
+                'emails/mail.html.twig',
+                ['contact' => $contact]
+            );
 
             $this->addFlash(
                 'success',
