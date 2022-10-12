@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ContactCrudController extends AbstractCrudController
 {
@@ -25,18 +26,19 @@ class ContactCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Demandes de contact')
             ->setEntityLabelInSingular('Demande de contact')
             ->setPageTitle('index', 'Nutridiet - administration des Demandes de contact')
-            ->setPaginatorPageSize(20);
+            ->setPaginatorPageSize(20)
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')
-                ->hideOnindex(),
+                ->hideOnForm(),
             TextField::new('fullName'),
-            TextField::new('pseudo'),
             TextField::new('email'),
             TextareaField::new('message')
+                ->setFormType(CKEditorType::class)
                 ->hideOnIndex(),
             DateTimeField::new('createdAt')
                 ->hideOnForm(),
