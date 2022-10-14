@@ -35,6 +35,17 @@ class AppFixtures extends Fixture
     {
         //users
         $users = [];
+
+        $admin = new User();
+        $admin->setFullName('Administrateur de nutridiet')
+            ->setPseudo(null)
+            ->setEmail('admin@nutridiet.fr')
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setPlainPassword('password');
+
+        $users[] = $admin;
+        $manager->persist($admin);
+
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->setFullName($this->faker->name())
