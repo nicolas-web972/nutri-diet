@@ -69,11 +69,9 @@ class Recipe
     private ?bool $isPublic = false;
 
     #[ORM\Column]
-    #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Assert\NotNull()]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class)]
