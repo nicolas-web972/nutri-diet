@@ -51,8 +51,8 @@ class RecipeTest extends KernelTestCase
         $recipe = $this->getEntity();
 
         $recipe
-        ->setName('')
-        ->setDescription('');
+            ->setName('')
+            ->setDescription('');
 
         $errors = $test->get('validator')->validate($recipe);
 
@@ -64,12 +64,12 @@ class RecipeTest extends KernelTestCase
     {
         $test = $this->kernel();
         $recipe = $this->getEntity();
-        
+
         $recipe
-        ->setTime(-1)
-        ->setNbPeople(-1)
-        ->setDifficulty(-1)
-        ->setPrice(-1);
+            ->setTime(-1)
+            ->setNbPeople(-1)
+            ->setDifficulty(-1)
+            ->setPrice(-1);
 
         $errors = $test->get('validator')->validate($recipe);
 
@@ -81,12 +81,12 @@ class RecipeTest extends KernelTestCase
     {
         $test = $this->kernel();
         $recipe = $this->getEntity();
-        
+
         $recipe
-        ->setTime(1442)
-        ->setNbPeople(52)
-        ->setDifficulty(7)
-        ->setPrice(1002);
+            ->setTime(1442)
+            ->setNbPeople(52)
+            ->setDifficulty(7)
+            ->setPrice(1002);
 
         $errors = $test->get('validator')->validate($recipe);
 

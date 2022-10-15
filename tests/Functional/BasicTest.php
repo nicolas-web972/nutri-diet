@@ -12,6 +12,5 @@ class BasicTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-
     }
 }
