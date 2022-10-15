@@ -79,7 +79,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Envoyer'
+                'label' => 'Soumettre ma demande'
             ])
             ->add('captcha', Recaptcha3Type::class, [
                 'constraints' => new Recaptcha3(),
