@@ -19,7 +19,7 @@
 				</div>
 			{% endfor %}
 
-			<form action="{{ path('security.login') }}" method="post">
+			<form action="{{ path('security.login') }}" method="post" name="login">
 				<div class="form-group">
 					<label for="username" class="form-label mt-4">Addresse e-mail</label>
 					<input type="email" class="form-control" id="username" name="_username" placeholder="entrez votre e-mail" value="{{ last_username }}">
