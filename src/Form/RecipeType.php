@@ -146,7 +146,8 @@ class RecipeType extends AbstractType
                 'label' => 'Image de la recette',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false
             ])
             ->add('ingredients', EntityType::class, [
                 'class' => Ingredient::class,
@@ -156,6 +157,7 @@ class RecipeType extends AbstractType
                         ->orderBy('i.name', 'ASC')
                         ->setParameter('user', $this->token->getToken()->getUser());
                 },
+                'required' => false,
                 'label' => 'Les ingrédients',
                 'label_attr' => [
                     'class' => 'form-label mt-4'

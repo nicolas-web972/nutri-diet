@@ -125,7 +125,7 @@ class IngredientController extends AbstractController
 
         $this->addFlash(
             'success',
-            'l\'ingrédient a été supprimé avec succès !'
+            "l'ingrédient a été supprimé avec succès !"
         );
 
         return $this->redirectToRoute('ingredient.index');
