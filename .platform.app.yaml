@@ -1,4 +1,4 @@
-name: app
+name: nutridiet
 
 type: php:8.1
 
@@ -56,3 +56,5 @@ hooks:
         set -x -e
 
         symfony-deploy
+relationships:
+    database: "mysqldb:mysql"
